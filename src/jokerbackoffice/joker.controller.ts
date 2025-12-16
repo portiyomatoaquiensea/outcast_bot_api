@@ -378,13 +378,14 @@ export class JokerController {
     const downline_code = findMemberRobotById.downline_code;
     const user_id = findMemberRobotById.user_id;
 
-    const findMember = this.jokerService.findMember({
+    const findMember = await this.jokerService.findMember({
         wb_id: wb_id,
         wb_code: wb_code,
         downline_id: downline_id,
         downline_code: downline_code,
         username: username
     });
+    
     if (findMember) {
       return new ResponseDto(
         'Member already exist',
@@ -409,7 +410,7 @@ export class JokerController {
         register_date: register_date,
         nickname: nickname,
     });
-
+    
     const insertPlayerAccount = await this.jokerService.insertPlayerAccount(newMember);
     if (!insertPlayerAccount) {
       return new ResponseDto(
@@ -428,7 +429,7 @@ export class JokerController {
       player_code,
       player_name: username,
     });
-
+    
     if (historicalTransaction) {
         return new ResponseDto(
           'Member already exist in historical transaction',
@@ -449,7 +450,6 @@ export class JokerController {
       historical_date: register_date,
       amount: 0.00,
     });
-    
     if (!insertHistoricalTransaction) {
       return new ResponseDto(
         'Failed to insert historical transaction',
