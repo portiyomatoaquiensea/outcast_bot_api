@@ -52,7 +52,7 @@ export class JokerController {
       'JOKER123',
       request_by
     );
-
+  
     if (!findActiveBoAccountSetting) {
       return new ResponseDto(
         'User Backoffice not found',

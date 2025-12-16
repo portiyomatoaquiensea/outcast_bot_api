@@ -118,7 +118,7 @@ export class JokerService {
     backofficeUser?: string,
   ): Promise<any | null> {
     const conditions: string[] = [
-      'backoffice_type = $2',
+      'backoffice_type = $1',
       'active = TRUE',
     ];
 
