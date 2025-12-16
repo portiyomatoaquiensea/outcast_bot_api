@@ -25,7 +25,6 @@ export class JokerController {
     @Body(new ValidationPipe()) jokerRobotStatementInsertDto: jokerRobotStatementInsertDto
   ): Promise<ResponseDto> {
 
-    const downline_code = jokerRobotStatementInsertDto.downlineCode;
     const date_time = jokerRobotStatementInsertDto.dateTime;
     const amount = jokerRobotStatementInsertDto.amount;
     const request_id = jokerRobotStatementInsertDto.requestId;
@@ -50,7 +49,6 @@ export class JokerController {
     }
 
     const findActiveBoAccountSetting = await this.jokerService.findActiveBoAccountSetting(
-      downline_code,
       'JOKER123',
       request_by
     );
@@ -65,6 +63,7 @@ export class JokerController {
     const downline_wb_id = findActiveBoAccountSetting.wb_id;
     const downline_wb_code = findActiveBoAccountSetting.wb_code;
     const downline_id = findActiveBoAccountSetting.downline_id;
+    const downline_code = findActiveBoAccountSetting.downlineCode;
 
     const insertedJkBackofficeStatement = await this.jokerService.insertedJkBackofficeStatement({
       dateTime: date_time,
@@ -287,11 +286,12 @@ export class JokerController {
   async memberList(
     @Body(new ValidationPipe()) jokerRobotMemberDto: JokerRobotMemberDto
   ): Promise<ResponseDto> {
-    const downline_code = jokerRobotMemberDto.downlineCode;
- 
+
+    const request_by = jokerRobotMemberDto.downlineCode;
+    
     const findActiveBoAccountSetting = await this.jokerService.findActiveBoAccountSetting(
-      downline_code,
-      'JOKER123'
+      'JOKER123',
+      request_by
     );
     
     if (!findActiveBoAccountSetting) {
@@ -300,7 +300,7 @@ export class JokerController {
         StatusCode.Failed,
         []);
     }
-
+    const downline_code = findActiveBoAccountSetting.downline_code;
     const pendingNewMember = await this.jokerService.pendingNewMember(
       downline_code,
       false
@@ -320,7 +320,8 @@ export class JokerController {
   async memberUpdate(
     @Body(new ValidationPipe()) jokerRobotMemberUpdateDto: JokerRobotMemberUpdateDto
   ): Promise<ResponseDto> {
-    const downline_code = jokerRobotMemberUpdateDto.downlineCode;
+
+    const request_by = jokerRobotMemberUpdateDto.downlineCode;
     const robot_member_id = jokerRobotMemberUpdateDto.member_id;
     const username = jokerRobotMemberUpdateDto.username?.trim();
     const nickname = jokerRobotMemberUpdateDto.nickname;
@@ -332,8 +333,8 @@ export class JokerController {
     const login_ip = jokerRobotMemberUpdateDto.loginIP;
 
     const findActiveBoAccountSetting = await this.jokerService.findActiveBoAccountSetting(
-      downline_code,
-      'JOKER123'
+      'JOKER123',
+      request_by,
     );
     
     if (!findActiveBoAccountSetting) {
@@ -374,6 +375,7 @@ export class JokerController {
     const wb_id = findMemberRobotById.wb_id;
     const wb_code = findMemberRobotById.wb_code;
     const downline_id = findMemberRobotById.downline_id;
+    const downline_code = findMemberRobotById.downline_code;
     const user_id = findMemberRobotById.user_id;
 
     const findMember = this.jokerService.findMember({

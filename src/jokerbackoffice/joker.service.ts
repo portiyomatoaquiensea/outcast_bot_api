@@ -114,17 +114,15 @@ export class JokerService {
   }
 
   async findActiveBoAccountSetting(
-    downlineCode: string,
     backofficeType: string,
     backofficeUser?: string,
   ): Promise<any | null> {
     const conditions: string[] = [
-      'downline_code = $1',
       'backoffice_type = $2',
       'active = TRUE',
     ];
 
-    const params: any[] = [downlineCode, backofficeType];
+    const params: any[] = [backofficeType];
 
     if (backofficeUser) {
       conditions.push(`backoffice_user = $${params.length + 1}`);
