@@ -63,7 +63,7 @@ export class JokerController {
     const downline_wb_id = findActiveBoAccountSetting.wb_id;
     const downline_wb_code = findActiveBoAccountSetting.wb_code;
     const downline_id = findActiveBoAccountSetting.downline_id;
-    const downline_code = findActiveBoAccountSetting.downlineCode;
+    const downline_code = findActiveBoAccountSetting.downline_code;
 
     const insertedJkBackofficeStatement = await this.jokerService.insertedJkBackofficeStatement({
       dateTime: date_time,
