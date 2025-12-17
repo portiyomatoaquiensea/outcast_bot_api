@@ -3,7 +3,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Transform } from 'class-transformer';
 
 ValidateNested()
-export class jokerRobotStatementInsertDto {
+export class JokerRobotStatementInsertDto {
 
     @ApiProperty()
     @IsString()

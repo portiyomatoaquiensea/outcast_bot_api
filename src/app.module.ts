@@ -14,6 +14,7 @@ import { AppService } from './app.service';
 
 import { CacheModuleConfig } from './cache/cache.module';
 import { JokerModule } from './jokerbackoffice/joker.module';
+import { KhModule } from './khbackoffice/kh.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { JokerModule } from './jokerbackoffice/joker.module';
     }),
     ScheduleModule.forRoot(),
     JokerModule,
+    KhModule,
     // Caches
     CacheModuleConfig,
   ],

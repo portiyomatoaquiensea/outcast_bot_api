@@ -7,9 +7,9 @@ import { JokerService } from './joker.service';
 import { JokerRobotMemberDto } from './dto/joker.robot.member.dto';
 import { Message, StatusCode } from '../common/response.enum';
 import { JokerRobotMemberUpdateDto } from './dto/joker.robot.member.update.dto';
-import { jokerRobotStatementInsertDto } from './dto/joker.robot.statement.insert.dto';
+import { JokerRobotStatementInsertDto } from './dto/joker.robot.statement.insert.dto';
 
-@ApiTags('Joker Pending Members List')
+@ApiTags('Joker Robot Backoffice api')
 @Controller('joker')
 export class JokerController {
   constructor(
@@ -22,7 +22,7 @@ export class JokerController {
   @ApiOkResponse({ type: ResponseDto })
   @ApiBadRequestResponse({ description: 'Bad Request' })
   async insertStatement(
-    @Body(new ValidationPipe()) jokerRobotStatementInsertDto: jokerRobotStatementInsertDto
+    @Body(new ValidationPipe()) jokerRobotStatementInsertDto: JokerRobotStatementInsertDto
   ): Promise<ResponseDto> {
 
     const date_time = jokerRobotStatementInsertDto.dateTime;
