@@ -377,6 +377,14 @@ export class JokerController {
     const downline_id = findMemberRobotById.downline_id;
     const downline_code = findMemberRobotById.downline_code;
     const user_id = findMemberRobotById.user_id;
+    
+    if (!username) {
+      return new ResponseDto(
+        'username invalid',
+        StatusCode.Failed,
+        []
+      );
+    }
 
     const findMember = await this.jokerService.findMember({
         wb_id: wb_id,

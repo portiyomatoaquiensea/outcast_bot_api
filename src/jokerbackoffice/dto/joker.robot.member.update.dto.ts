@@ -13,10 +13,10 @@ export class JokerRobotMemberUpdateDto {
     @IsNotEmpty()
     member_id: number;
 
-    @ApiProperty()
-    @IsNotEmpty()
+    @ApiProperty({ required: false })
+    @IsOptional()
     @IsString()
-    username: string;
+    username?: string;
 
     @ApiProperty({ required: false })
     @IsOptional()
