@@ -645,16 +645,26 @@ export class KhController {
   ): Promise<ResponseDto> {
 
     const request_by = khRobotMemberUpdateDto.downlineCode;
-    const robot_member_id = khRobotMemberUpdateDto.member_id;
+    const robot_member_id = khRobotMemberUpdateDto.memberId;
+    const bankAccount = khRobotMemberUpdateDto.bankAccount;
+    const agent = khRobotMemberUpdateDto.agent;
+    const totalReferral = khRobotMemberUpdateDto.totalReferral;
+    const registerTime = khRobotMemberUpdateDto.registerTime;
+    const totalDeposit = khRobotMemberUpdateDto.totalDeposit;
+    const ip = khRobotMemberUpdateDto.ip;
+    const lastRefer = khRobotMemberUpdateDto.lastRefer;
+    const remark = khRobotMemberUpdateDto.remark;
+    const noId = khRobotMemberUpdateDto.noId;
+    const lastDepositTime = khRobotMemberUpdateDto.lastDepositTime;
+    const lastLoginTime = khRobotMemberUpdateDto.lastLoginTime;
+    const balance = khRobotMemberUpdateDto.balance;
+    const userBankName = khRobotMemberUpdateDto.userBankName;
+    const currency = khRobotMemberUpdateDto.currency;
+    const lastDeposit = khRobotMemberUpdateDto.lastDeposit;
+    const userBankNo = khRobotMemberUpdateDto.userBankNo;
     const username = khRobotMemberUpdateDto.username?.trim();
-    const nickname = khRobotMemberUpdateDto.nickname;
-    const member_type = khRobotMemberUpdateDto.type;
-    const first_name = khRobotMemberUpdateDto.firstName;
-    const last_name = khRobotMemberUpdateDto.lastName;
-    const created_time = khRobotMemberUpdateDto.createdTime;
-    const last_login = khRobotMemberUpdateDto.lastLogin;
-    const login_ip = khRobotMemberUpdateDto.loginIP;
-
+    const status = khRobotMemberUpdateDto.status;
+   
     const findActiveBoAccountSetting = await this.khService.findActiveBoAccountSetting(
       '855KH',
       request_by,
@@ -676,13 +686,13 @@ export class KhController {
     }
 
     const updateMemberRobot = Object.assign({}, {
-        nickname: nickname,
-        firstname: first_name,
-        lastname: last_name,
-        type: member_type,
-        created_time: this.khService.parseDateTime(created_time),
-        last_login: this.khService.parseDateTime(last_login),
-        login_ip: login_ip,
+        nickname: username || bankAccount || '',
+        firstname: username,
+        lastname: username,
+        type: remark,
+        created_time: this.khService.parseDateTime(registerTime),
+        last_login: this.khService.parseDateTime(lastLoginTime),
+        login_ip: ip,
         robot_status: true,
     });
 
@@ -725,7 +735,7 @@ export class KhController {
     }
 
     const player_code = await this.khService.generatePlayerCode(downline_code);
-    const register_date = this.khService.getRegisterDate(created_time);
+    const register_date = this.khService.getRegisterDate(registerTime);
 
     const newMember = Object.assign({}, {
         wb_id: wb_id,
@@ -739,7 +749,7 @@ export class KhController {
         deleted: false,
         active: true,
         register_date: register_date,
-        nickname: nickname,
+        nickname: username,
     });
     
     const insertPlayerAccount = await this.khService.insertPlayerAccount(newMember);

@@ -12,7 +12,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import { CacheModuleConfig } from './cache/cache.module';
+// import { CacheModuleConfig } from './cache/cache.module';
 import { JokerModule } from './jokerbackoffice/joker.module';
 import { KhModule } from './khbackoffice/kh.module';
 
@@ -27,7 +27,7 @@ import { KhModule } from './khbackoffice/kh.module';
     JokerModule,
     KhModule,
     // Caches
-    CacheModuleConfig,
+    // CacheModuleConfig,
   ],
   controllers: [AppController],
   providers: [
